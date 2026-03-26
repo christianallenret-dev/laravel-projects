@@ -8,7 +8,7 @@
 </head>
 <body>
     <header class="flex items-center justify-between max-w-5xl mx-auto px-6 py-4 border-b border-gray-200 gap-4">
-        <h1 class="text-xl font-semibold tracking-tight text-gray-800">Movie Watchlist</h1>
+        <h1 class="text-4xl font-bold tracking-tight text-gray-400">Movie Watchlist</h1>
         <a href="/watchlist" class="text-gray-600 hover:text-black transition">
             All Movies
         </a>
@@ -18,7 +18,7 @@
         </a>
     </header>
 
-    <main class="container">
+    <main class="bg-gray-950 container mx-auto px-6 py-6">
         {{ $slot }}
     </main>
 </body>

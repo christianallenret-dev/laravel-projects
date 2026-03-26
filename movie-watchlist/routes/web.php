@@ -1,17 +1,10 @@
 <?php
 
+use App\Http\Controllers\MovieController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/watchlist', function () {
-    return view('movie.index');
-});
-
-Route::get('/watchlist/create', function () {
-    return view('movie.new');
-});
-
-Route::get('/watchlist/{id}', function () {
-    return view('movie.show');
-});
+Route::get('/watchlist', [MovieController::class, 'index'])->name('movie.index');
+Route::get('/watchlist/create', [MovieController::class, 'create'])->name('movie.create');
+Route::get('/watchlist/{id}', [MovieController::class, 'show'])->name('movie.show');
 
 
