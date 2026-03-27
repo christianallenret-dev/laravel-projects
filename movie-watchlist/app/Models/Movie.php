@@ -11,6 +11,10 @@ class Movie extends Model
         'genre',
         'description',
         'watched',
+        'overview',
+        'release_year',
+        'rating',
+        'total_reviews',
         'img_url',
     ];
 
