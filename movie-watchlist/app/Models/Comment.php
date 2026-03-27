@@ -12,7 +12,7 @@ class Comment extends Model
         'rating',
     ];
 
-    public function movie() {
+    public function movies() {
         return $this->hasMany(Movie::class);
     }
 }

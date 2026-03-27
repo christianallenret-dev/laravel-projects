@@ -18,7 +18,7 @@ class Movie extends Model
         'img_url',
     ];
 
-    public function comment() {
+    public function comments() {
         return $this->hasMany(Comment::class);
     }
 }

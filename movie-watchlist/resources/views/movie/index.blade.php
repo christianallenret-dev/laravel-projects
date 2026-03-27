@@ -25,6 +25,8 @@
                     </a>
                 </x-card>
             @endforeach
+            
+            {{ $movies->links() }}
         </div>
     </body>
 </x-layout>
