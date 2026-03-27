@@ -9,6 +9,7 @@ class Comment extends Model
     protected $fillable = [
         'author',
         'body',
+        'rating',
     ];
 
     public function movie() {

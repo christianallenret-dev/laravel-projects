@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('movie_id')->constrained()->onDelete('cascade');
             $table->string('author');
             $table->text('body');
+            $table->integer('rating');
             $table->timestamps();
         });
     }
