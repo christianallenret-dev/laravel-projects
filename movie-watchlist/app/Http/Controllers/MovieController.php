@@ -14,8 +14,8 @@ class MovieController extends Controller
         return view('movie.index', ['movies' => $movies]);
     }
 
-    public function show($id) {
-        $movie = Movie::with('comments')->findOrFail($id);    
+    public function show(Movie $movie) {
+        $movie->load('comments'); 
 
         return view('movie.show', ['movie' => $movie]);
     }
@@ -26,6 +26,28 @@ class MovieController extends Controller
     }
 
     public function store(Request $request) {
-        
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',
+            'genre' => 'required|string|min:0|max:20',
+            'description' => 'required|string|min:20|max:1000',
+            'overview' => 'required|string|min:20|max:255',
+            'release_year' => 'required|integer|min:1930|max:2030',
+            'rating' => 'required|integer|min:0|max:10',
+            'total_reviews' => 'required|integer|min:0|max:10000000',
+            'img_url' => 'required|string',
+            'watched' => 'required|boolean',
+        ]);
+
+        $validated['watched'] = $request->boolean('watched');
+
+        Movie::create($validated);
+
+        return redirect()->route('movie.index')->with('success', 'Movie Added!');
+    }
+
+    public function destroy(Movie $movie) {
+        $movie->delete();
+
+        return redirect()->route('movie.index')->with('success', 'Movie Deleted!');
     }
 }

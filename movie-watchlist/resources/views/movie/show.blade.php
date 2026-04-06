@@ -1,6 +1,4 @@
 <x-layout title="{{ $movie->title }} | Movie Watchlist">
-    <body class="bg-gray-950 text-white font-sans">
-
         <!-- 🎬 HERO SECTION -->
         <section class="relative">
             <!-- Background -->
@@ -36,6 +34,17 @@
                     <p class="text-gray-300 mb-6">
                         {{ $movie->description }}
                     </p>
+
+                    <div class="mt-4">
+                        <form action="{{ route('movie.destroy', $movie->id) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg"
+                                onclick="return confirm('Are you sure you want to delete this movie?');">
+                                Delete Movie
+                            </button>
+                        </form>
+                    </div>
                 </div>
 
             </div>
@@ -76,18 +85,43 @@
                     @endforeach
             </div>
 
-            </div>
-
             <!-- Add Comment -->
-            <div class="mt-8 flex gap-3">
-            <input type="text" placeholder="Add a comment..."
-                    class="flex-1 bg-gray-800 text-white px-4 py-2 rounded-lg outline-none focus:ring-2 focus:ring-blue-500"/>
-            <button class="bg-blue-500 px-5 py-2 rounded-lg hover:bg-blue-600">
-                Post
-            </button>
-            </div>
+            <form action="{{ route('comments.store', $movie) }}" method="POST" class="mt-8 space-y-4">
+                @csrf
+                <div class="flex flex-col md:flex-row gap-3">
+                    <input 
+                        type="text"
+                        id="author"
+                        name="author"  
+                        placeholder="Name"
+                        value="{{ old('author') }}"
+                        class="w-full md:w-1/2 bg-gray-800 text-white px-4 py-2 rounded-lg outline-none focus:ring-2 focus:ring-blue-500"
+                    />
+
+                    <input
+                        id="rating"
+                        name="rating" 
+                        type="number" 
+                        placeholder="Rating"
+                        min="1"
+                        max="5"
+                        value="{{ old('rating') }}"
+                        required
+                        class="w-full md:w-1/2 bg-gray-800 text-white px-4 py-2 rounded-lg outline-none focus:ring-2 focus:ring-blue-500"
+                    />
+                </div>
+                
+                <textarea
+                    id="body"
+                    name="body"  
+                    placeholder="Add a comment..."
+                    class="w-full bg-gray-800 text-white px-4 py-2 rounded-lg outline-none focus:ring-2 focus:ring-blue-500"
+                >{{ old('body') }}</textarea>
+                
+                <button type="submit" class="bg-blue-500 px-5 py-2 rounded-lg hover:bg-blue-600">
+                    Post
+                </button>
+            </form>
 
         </section>
-
-        </body>
 </x-layout>
