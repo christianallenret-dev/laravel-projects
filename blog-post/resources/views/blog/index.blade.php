@@ -15,9 +15,18 @@
 
                     <!-- Footer -->
                     <div class="mt-4 flex items-center justify-between">
-                        <span class="text-sm text-gray-700 dark:text-gray-200">
-                            By: {{ optional($blog->user)->name ?? 'Unknown' }}
-                        </span>
+                        <div class="flex flex-col">
+                            <span class="text-sm text-gray-700 dark:text-gray-200">
+                                By: {{ optional($blog->user)->name ?? 'Unknown' }}
+                            </span>
+
+                            @if(optional($blog->user)->role === 'admin')
+                                <span class="text-xs text-red-700 italic">
+                                    Admin
+                                </span>
+                            @endif
+                        </div>
+
                         <span class="text-xs text-gray-500">
                             {{ optional($blog->created_at)->format('M d, Y') }}
                         </span>
